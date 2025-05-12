@@ -1,5 +1,4 @@
-name: CI Python Docker URL Param # Nom de la pipeline
-on:
+name: CI Python Docker URL Param
 push:
 branches: [ "main" ]
 pull_request:
@@ -10,9 +9,7 @@ runs-on: ubuntu-latest
 steps:
 - name: Checkout code
 uses: actions/checkout@v4
-# Étape de construction de l'image Docker
 - name: Build Docker image
 run: docker build -t myapp-ci:${{ github.sha }} .
-# Étape d'exécution des tests DANS l'image construite
 - name: Run tests inside Docker image
 run: docker run --rm myapp-ci:${{ github.sha }} pytest
